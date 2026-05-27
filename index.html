@@ -29,34 +29,34 @@
       will-change: transform, filter;
     }
 
-    /* layer 1 — violet / blue / green / amber — spins faster */
+    /* layer 1 — deep navy / steel blue — slow spin */
     .bg1.on {
-      opacity: 0.20;
+      opacity: 0.18;
       background: conic-gradient(from 0deg at 35% 45%,
-        #6d28d9 0deg, #0ea5e9 80deg, #10b981 160deg,
-        #f59e0b 240deg, #6d28d9 360deg);
-      filter: blur(48px) saturate(2.0);
-      animation: spin1 15s linear infinite, hue1 11s ease-in-out infinite;
+        #0f2a5e 0deg, #1e4d8c 80deg, #0e7490 160deg,
+        #1e3a5f 240deg, #0f2a5e 360deg);
+      filter: blur(60px) saturate(1.3);
+      animation: spin1 25s linear infinite, hue1 18s ease-in-out infinite;
     }
 
-    /* layer 2 — pink / violet / sky — counter-spin */
+    /* layer 2 — indigo / slate blue — counter-spin */
     .bg2.on {
-      opacity: 0.15;
+      opacity: 0.12;
       background: conic-gradient(from 180deg at 65% 55%,
-        #db2777 0deg, #6d28d9 80deg, #0ea5e9 160deg,
-        #10b981 240deg, #db2777 360deg);
-      filter: blur(62px) saturate(2.0);
-      animation: spin2 20s linear infinite reverse, hue2 15s ease-in-out infinite;
+        #1e3a8a 0deg, #1e4d8c 80deg, #0e7490 160deg,
+        #0f2a5e 240deg, #1e3a8a 360deg);
+      filter: blur(72px) saturate(1.2);
+      animation: spin2 34s linear infinite reverse, hue2 22s ease-in-out infinite;
       mix-blend-mode: screen;
     }
 
-    /* layer 3 — bright cyan + warm gold accent — drifts */
+    /* layer 3 — cool teal accent — drifts gently */
     .bg3.on {
-      opacity: 0.14;
+      opacity: 0.10;
       background: conic-gradient(from 90deg at 50% 30%,
-        #22d3ee 0deg, #fbbf24 120deg, #a78bfa 240deg, #22d3ee 360deg);
-      filter: blur(70px) saturate(2.4);
-      animation: spin3 27s linear infinite, hue3 9s ease-in-out infinite, wander 18s ease-in-out infinite;
+        #0e7490 0deg, #1e4d8c 120deg, #1e3a8a 240deg, #0e7490 360deg);
+      filter: blur(80px) saturate(1.1);
+      animation: spin3 42s linear infinite, hue3 28s ease-in-out infinite, wander 24s ease-in-out infinite;
       mix-blend-mode: screen;
     }
 
@@ -75,17 +75,17 @@
 
     /* hue-rotate breathing — makes colors shift over time */
     @keyframes hue1 {
-      0%,100% { filter: blur(48px) saturate(2.0) hue-rotate(0deg); }
-      50%      { filter: blur(48px) saturate(2.5) hue-rotate(50deg); }
+      0%,100% { filter: blur(60px) saturate(1.3) hue-rotate(0deg); }
+      50%      { filter: blur(60px) saturate(1.5) hue-rotate(15deg); }
     }
     @keyframes hue2 {
-      0%,100% { filter: blur(62px) saturate(2.0) hue-rotate(0deg); }
-      50%      { filter: blur(62px) saturate(2.3) hue-rotate(-40deg); }
+      0%,100% { filter: blur(72px) saturate(1.2) hue-rotate(0deg); }
+      50%      { filter: blur(72px) saturate(1.4) hue-rotate(-10deg); }
     }
     @keyframes hue3 {
-      0%,100% { filter: blur(70px) saturate(2.4) hue-rotate(0deg); }
-      33%      { filter: blur(70px) saturate(2.8) hue-rotate(60deg); }
-      66%      { filter: blur(70px) saturate(2.2) hue-rotate(-20deg); }
+      0%,100% { filter: blur(80px) saturate(1.1) hue-rotate(0deg); }
+      33%      { filter: blur(80px) saturate(1.3) hue-rotate(12deg); }
+      66%      { filter: blur(80px) saturate(1.1) hue-rotate(-8deg); }
     }
 
     /* wander — layer 3 drifts across while spinning */
@@ -113,8 +113,8 @@
       transition: opacity 2.5s ease;
     }
     .pulse.on {
-      opacity: 1;
-      animation: breathe 4.5s ease-in-out infinite;
+      opacity: 0.7;
+      animation: breathe 6s ease-in-out infinite;
     }
 
     @keyframes breathe {
