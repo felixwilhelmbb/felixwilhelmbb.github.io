@@ -295,6 +295,96 @@
       .pulse2 { display: none; }
       .modal { padding: 2rem 1.6rem; }
     }
+
+    /* ── contact floating button ── */
+    .contact-fab {
+      position: fixed; bottom: 1.2rem; left: 1.4rem; z-index: 6;
+      background: none; border: none; font-family: inherit;
+      cursor: pointer; padding: 0.6rem; touch-action: manipulation;
+      color: rgba(255,255,255,0.12); transition: color 0.2s;
+      font-size: 0.58rem; font-weight: 200; letter-spacing: 0.1em;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .contact-fab:hover { color: rgba(255,255,255,0.42); }
+    .contact-fab svg { width: 11px; height: 11px; fill: currentColor; }
+
+    /* ── slide-up contact panel ── */
+    .contact-panel {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
+      background: rgba(3,3,7,0.97);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      padding: 2rem 2rem 2.5rem;
+      transform: translateY(100%);
+      transition: transform 0.45s cubic-bezier(.22,1,.36,1);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .contact-panel.open { transform: translateY(0); }
+
+    .cp-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.6rem;
+    }
+    .cp-header h2 {
+      font-size: 0.62rem; font-weight: 300; letter-spacing: 0.28em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
+    }
+    .cp-close {
+      background: none; border: none; color: rgba(255,255,255,0.25);
+      font-size: 1.3rem; cursor: pointer; font-family: inherit;
+      transition: color 0.2s; padding: 0.4rem; touch-action: manipulation;
+    }
+    .cp-close:hover { color: rgba(255,255,255,0.75); }
+
+    .cp-form {
+      display: grid; gap: 1rem;
+      max-width: 460px; margin: 0 auto;
+    }
+    .cp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 520px) { .cp-row { grid-template-columns: 1fr; } }
+
+    .cp-field {
+      display: flex; flex-direction: column; gap: 0.35rem;
+    }
+    .cp-field label {
+      font-size: 0.58rem; font-weight: 200; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.28);
+    }
+    .cp-field input, .cp-field textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+      font-family: 'Inter', sans-serif; font-size: 0.76rem; font-weight: 200;
+      padding: 0.7rem 0.9rem; outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .cp-field input:focus, .cp-field textarea:focus {
+      border-color: rgba(34,211,238,0.35);
+    }
+    .cp-field textarea { min-height: 90px; }
+
+    .cp-honey { display: none; }
+
+    .cp-submit {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.95rem 2.2rem; border: 1px solid rgba(255,255,255,0.28);
+      color: rgba(255,255,255,0.88); background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 200;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.3s, border-color 0.3s;
+      width: 100%; margin-top: 0.4rem;
+    }
+    .cp-submit:hover { background: rgba(255,255,255,0.07); border-color: rgba(34,211,238,0.3); }
+    .cp-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .cp-msg {
+      font-size: 0.7rem; font-weight: 200; letter-spacing: 0.1em;
+      text-align: center; padding: 0.6rem 0; display: none;
+    }
+    .cp-msg.ok { color: rgba(16,185,129,0.85); display: block; }
+    .cp-msg.err { color: rgba(239,68,68,0.85); display: block; }
   </style>
 </head>
 <body>
@@ -328,6 +418,37 @@
   </a>
 </div>
 
+<button class="contact-fab" onclick="document.getElementById('contactPanel').classList.add('open')">
+  <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+  Contact
+</button>
+
+<div class="contact-panel" id="contactPanel">
+  <div class="cp-header">
+    <h2>Get in Touch</h2>
+    <button class="cp-close" onclick="document.getElementById('contactPanel').classList.remove('open')">&times;</button>
+  </div>
+  <form class="cp-form" id="contactForm">
+    <div class="cp-row">
+      <div class="cp-field">
+        <label>Name</label>
+        <input type="text" name="name" required placeholder="Your name" autocomplete="name" />
+      </div>
+      <div class="cp-field">
+        <label>Email</label>
+        <input type="email" name="email" required placeholder="your@email.com" autocomplete="email" />
+      </div>
+    </div>
+    <div class="cp-field">
+      <label>Message</label>
+      <textarea name="message" required placeholder="How can I help you?"></textarea>
+    </div>
+    <input class="cp-honey" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+    <button class="cp-submit" type="submit" id="cpBtn">Send Message</button>
+    <div class="cp-msg" id="cpMsg"></div>
+  </form>
+</div>
+
 <button class="imp" onclick="document.getElementById('imp').classList.add('on')">Impressum</button>
 <div class="overlay" id="imp" onclick="if(event.target===this)this.classList.remove('on')">
   <div class="modal">
@@ -346,6 +467,36 @@
       document.getElementById(id).classList.add('on')
     );
   }, 3500);
+
+  // contact form — Formspree AJAX submit
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cpBtn');
+    const msg = document.getElementById('cpMsg');
+    msg.className = 'cp-msg';
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+      const res = await fetch('https://formspree.io/f/mwvzaoag', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(this)
+      });
+      if (res.ok) {
+        msg.textContent = 'Message sent — I\'ll be in touch shortly.';
+        msg.className = 'cp-msg ok';
+        this.reset();
+        btn.textContent = 'Send Message';
+      } else {
+        throw new Error();
+      }
+    } catch {
+      msg.textContent = 'Something went wrong. Please try again.';
+      msg.className = 'cp-msg err';
+      btn.textContent = 'Send Message';
+    }
+    btn.disabled = false;
+  });
 
   const wrap = document.getElementById('nameWrap');
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
