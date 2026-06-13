@@ -10,5 +10,27 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      addEventListener('load', () => {
+        const linkStatus = () => {
+          const label = [...document.querySelectorAll('span')].find(el => el.textContent.trim() === 'Available');
+          const status = label && label.closest('div');
+          if (!status) return false;
+          status.style.pointerEvents = 'auto';
+          status.style.cursor = 'pointer';
+          status.setAttribute('role', 'link');
+          status.setAttribute('tabindex', '0');
+          status.setAttribute('aria-label', 'Private Agent Control öffnen');
+          const open = () => window.open('https://control.felixwilhelm.cloud', '_blank', 'noopener,noreferrer');
+          status.addEventListener('click', open);
+          status.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') open(); });
+          return true;
+        };
+        if (!linkStatus()) {
+          const timer = setInterval(() => { if (linkStatus()) clearInterval(timer); }, 250);
+          setTimeout(() => clearInterval(timer), 10000);
+        }
+      });
+    </script>
   </body>
 </html>
