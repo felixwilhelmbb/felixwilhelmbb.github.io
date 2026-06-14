@@ -7,30 +7,12 @@
     <meta name="description" content="Felix Wilhelm — Personalberater & Headhunter" />
     <script type="module" crossorigin src="/assets/index-DwLEdhmE.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CqCvBDjT.css">
+    <style>
+      .terminal-entry{position:fixed;z-index:100;top:20px;left:20px;display:flex;align-items:center;gap:10px;padding:10px 13px;border:1px solid rgba(110,231,183,.28);background:rgba(0,10,6,.56);color:rgba(209,250,229,.86);font:600 10px/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;backdrop-filter:blur(12px);box-shadow:0 0 24px rgba(52,211,153,.08);transition:.25s ease}.terminal-entry:hover,.terminal-entry:focus{color:#d1fae5;border-color:rgba(110,231,183,.7);background:rgba(6,78,59,.48);box-shadow:0 0 30px rgba(52,211,153,.2);outline:none}.terminal-entry svg{width:15px;height:15px;stroke:#6ee7b7;fill:none;stroke-width:1.8}.terminal-entry i{width:6px;height:6px;background:#6ee7b7;box-shadow:0 0 9px #6ee7b7}@media(max-width:600px){.terminal-entry{top:14px;left:14px;min-height:42px;padding:10px 12px}}
+    </style>
   </head>
   <body>
     <div id="root"></div>
-    <script>
-      addEventListener('load', () => {
-        const linkStatus = () => {
-          const label = [...document.querySelectorAll('span')].find(el => el.textContent.trim() === 'Available');
-          const status = label && label.closest('div');
-          if (!status) return false;
-          status.style.pointerEvents = 'auto';
-          status.style.cursor = 'pointer';
-          status.setAttribute('role', 'link');
-          status.setAttribute('tabindex', '0');
-          status.setAttribute('aria-label', 'Private Agent Control öffnen');
-          const open = () => window.open('https://control.felixwilhelm.cloud', '_blank', 'noopener,noreferrer');
-          status.addEventListener('click', open);
-          status.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') open(); });
-          return true;
-        };
-        if (!linkStatus()) {
-          const timer = setInterval(() => { if (linkStatus()) clearInterval(timer); }, 250);
-          setTimeout(() => clearInterval(timer), 10000);
-        }
-      });
-    </script>
+    <a class="terminal-entry" href="https://control.felixwilhelm.cloud" target="_blank" rel="noopener noreferrer" aria-label="Terminal Online öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 7 5 5-5 5M13 17h6"/></svg><span>Terminal Online</span><i aria-hidden="true"></i></a>
   </body>
 </html>
